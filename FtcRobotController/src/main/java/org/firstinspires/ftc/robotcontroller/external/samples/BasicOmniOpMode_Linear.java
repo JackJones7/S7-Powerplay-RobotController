@@ -47,6 +47,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Note that a Mecanum drive must display an X roller-pattern when viewed from above.
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Holonomic drives provide the ability for the robot to move in three axes (directions) simultaneously.
  * Each motion axis is controlled by one Joystick axis.
  *
@@ -59,15 +60,27 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  * 1) Axial:    Driving forward and backward               Left-joystick Forward/Backward
 >>>>>>> FtcRobotController/master
+=======
+ * Also note that it is critical to set the correct rotation direction for each motor.  See details below.
+ *
+ * Holonomic drives provide the ability for the robot to move in three axes (directions) simultaneously.
+ * Each motion axis is controlled by one Joystick axis.
+ *
+ * 1) Axial:    Driving forward and backward               Left-joystick Forward/Backward
+>>>>>>> roadrunner-update
  * 2) Lateral:  Strafing right and left                     Left-joystick Right and Left
  * 3) Yaw:      Rotating Clockwise and counter clockwise    Right-joystick Right and Left
  *
  * This code is written assuming that the right-side motors need to be reversed for the robot to drive forward.
 <<<<<<< HEAD
+<<<<<<< HEAD
  * When you first test your robot, if it moves backwards when you push the left stick forward, then you must flip
 =======
  * When you first test your robot, if it moves backward when you push the left stick forward, then you must flip
 >>>>>>> FtcRobotController/master
+=======
+ * When you first test your robot, if it moves backward when you push the left stick forward, then you must flip
+>>>>>>> roadrunner-update
  * the direction of all 4 motors (see code below).
  *
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
@@ -95,7 +108,6 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "right_front_drive");
         rightBackDrive = hardwareMap.get(DcMotor.class, "right_back_drive");
 
-
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
         // ########################################################################################
@@ -106,6 +118,7 @@ public class BasicOmniOpMode_Linear extends LinearOpMode {
         // when you first test your robot, push the left joystick forward and observe the direction the wheels turn.
         // Reverse the direction (flip FORWARD <-> REVERSE ) of any wheel that runs backward
         // Keep testing until ALL the wheels move the robot forward when you push the left joystick forward.
+
 
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);

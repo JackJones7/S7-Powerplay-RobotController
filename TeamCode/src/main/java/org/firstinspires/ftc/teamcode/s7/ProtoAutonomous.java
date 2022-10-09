@@ -56,7 +56,7 @@ public class ProtoAutonomous extends OpMode{
     public void init() {
         //TF relies on Vuforia, so init Vuforia first
         vuforia = tfHandler.initVuforia(VUFORIA_KEY);
-        initTfod();
+        tfod = tfHandler.initTfod(hardwareMap, vuforia, TFOD_MODEL_ASSET, LABELS);
 
         //If TF was successfully initialized
         if (tfod != null) {
@@ -107,23 +107,6 @@ public class ProtoAutonomous extends OpMode{
         }
     }
 
-
-    //TODO: Move TF Init to tfHandler
-
-    private void initTfod() {
-        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
-                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
-        tfodParameters.minResultConfidence = 0.75f;
-        tfodParameters.isModelTensorFlow2 = true;
-        tfodParameters.inputSize = 300;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-
-        // Use loadModelFromAsset() if the TF Model is built in as an asset by Android Studio
-        // Use loadModelFromFile() if you have downloaded a custom team model to the Robot Controller's FLASH.
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-        // tfod.loadModelFromFile(TFOD_MODEL_FILE, LABELS);
-    }
 
 
 }

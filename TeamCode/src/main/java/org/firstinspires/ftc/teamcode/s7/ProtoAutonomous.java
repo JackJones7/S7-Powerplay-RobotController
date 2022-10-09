@@ -94,7 +94,15 @@ public class ProtoAutonomous extends OpMode{
             List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions(); //Get new recognitions, if any
 
             if (updatedRecognitions != null) {
-                signalFront = updatedRecognitions.get(0).getLabel();
+                double bestConfidence = 0.0;
+
+                for (Recognition recognition : updatedRecognitions) {
+
+                    if (recognition.getConfidence() > bestConfidence) {
+                        signalFront = recognition.getLabel();
+                        bestConfidence = recognition.getConfidence();
+                    }
+                }
             }
         }
     }

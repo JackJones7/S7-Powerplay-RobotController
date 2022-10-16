@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.s7;
 
+import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -11,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
+import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.s7.framework.tfHandler;
 
 import java.util.List;
@@ -45,10 +48,18 @@ public class ProtoAutonomous extends OpMode{
 
 
 
-    //Core
+    /* Core */
+
+    private int jobIndex = 0;
 
     //TODO: Change this to enum or other better type
     private String signalFront = ""; //Stores image on front of signal, determined on loop()
+
+    private SampleMecanumDrive drive;
+
+    /* A ton of trajectories */
+
+    Trajectory trForward;
 
 
 
@@ -57,6 +68,7 @@ public class ProtoAutonomous extends OpMode{
         //TF relies on Vuforia, so init Vuforia first
         vuforia = tfHandler.initVuforia(VUFORIA_KEY);
         tfod = tfHandler.initTfod(hardwareMap, vuforia, TFOD_MODEL_ASSET, LABELS);
+        drive = new SampleMecanumDrive(hardwareMap);
 
         //If TF was successfully initialized
         if (tfod != null) {
@@ -68,6 +80,8 @@ public class ProtoAutonomous extends OpMode{
 
         telemetry.addData("Tensorflow", "Ready");
         telemetry.update();
+
+        buildTrajectories();
     }
 
     /*
@@ -80,10 +94,28 @@ public class ProtoAutonomous extends OpMode{
     @Override
     public void loop() {
 
+        //I guess this is a state machine
+        switch(jobIndex) {
 
-        findSignalFront();
-        telemetry.addData("Signal front", signalFront);
-        telemetry.update();
+            case 0:
+                findSignalFront();
+                telemetry.addData("Signal front", signalFront);
+                telemetry.update();
+
+                if (signalFront != "") {
+                    jobIndex++;
+                }
+                break;
+
+            case 1:
+
+                drive.followTrajectory(trForward);
+                break;
+
+
+        }
+
+
 
 
     }
@@ -108,5 +140,10 @@ public class ProtoAutonomous extends OpMode{
     }
 
 
+    private void buildTrajectories() {
+        trForward = drive.trajectoryBuilder(new Pose2d())
+                .forward(12.0)
+                .build();
+    }
 
 }

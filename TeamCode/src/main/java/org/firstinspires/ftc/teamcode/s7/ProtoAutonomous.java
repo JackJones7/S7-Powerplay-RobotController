@@ -3,18 +3,15 @@ package org.firstinspires.ftc.teamcode.s7;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.s7.framework.tfHandler;
+import org.firstinspires.ftc.teamcode.trajectorysequence.TrajectorySequence;
 
 import java.util.List;
 
@@ -57,9 +54,14 @@ public class ProtoAutonomous extends OpMode{
 
     private SampleMecanumDrive drive;
 
+    private double inwardDir = -1;
+
     /* A ton of trajectories */
 
     Trajectory trForward;
+    Trajectory trOutward1Tile;
+    Trajectory trOutward;
+    Trajectory trForward3Tiles;
 
 
 
@@ -105,13 +107,27 @@ public class ProtoAutonomous extends OpMode{
                 if (signalFront != "") {
                     jobIndex++;
                 }
+                jobIndex++;
                 break;
 
             case 1:
 
-                drive.followTrajectory(trForward);
+                drive.followTrajectory(trOutward);
+
+                if (!drive.isBusy()) {
+                    jobIndex++;
+                }
+
                 break;
 
+            case 2:
+                drive.followTrajectory(trForward3Tiles);
+
+                if(!drive.isBusy()) {
+                    jobIndex++;
+                }
+
+                break;
 
         }
 
@@ -143,6 +159,18 @@ public class ProtoAutonomous extends OpMode{
     private void buildTrajectories() {
         trForward = drive.trajectoryBuilder(new Pose2d())
                 .forward(12.0)
+                .build();
+
+        trOutward1Tile = drive.trajectoryBuilder(new Pose2d())
+                .strafeRight(24.0)
+                .build();
+
+        trOutward = drive.trajectoryBuilder(new Pose2d())
+                .strafeRight(24.0)
+                .build();
+
+        trForward3Tiles = drive.trajectoryBuilder(new Pose2d())
+                .forward(72.0)
                 .build();
     }
 

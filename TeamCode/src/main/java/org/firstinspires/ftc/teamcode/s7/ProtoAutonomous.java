@@ -63,6 +63,8 @@ public class ProtoAutonomous extends OpMode{
     Trajectory trOutward;
     Trajectory trForward3Tiles;
 
+    private TrajectorySequence currentSequence;
+
 
 
     @Override
@@ -112,24 +114,33 @@ public class ProtoAutonomous extends OpMode{
 
             case 1:
 
-                drive.followTrajectory(trOutward);
-
-                if (!drive.isBusy()) {
-                    jobIndex++;
-                }
-
-                break;
-
-            case 2:
-                drive.followTrajectory(trForward3Tiles);
-
-                if(!drive.isBusy()) {
-                    jobIndex++;
-                }
+                currentSequence = drive.trajectorySequenceBuilder(new Pose2d())
+                        .strafeRight(24.0)
+                        .forward(72.0)
+                        .build();
 
                 break;
+
+            //case 2:
+            //    drive.followTrajectory(trForward3Tiles);
+//
+            //    if(!drive.isBusy()) {
+            //        jobIndex++;
+            //    }
+//
+            //    break;
 
         }
+
+        if (currentSequence != null) {
+            drive.followTrajectorySequence(currentSequence);
+        }
+
+        if (!drive.isBusy()) {
+            currentSequence = null;
+        }
+
+
 
 
 

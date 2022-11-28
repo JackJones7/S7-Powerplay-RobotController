@@ -1,8 +1,4 @@
-
-/* Copyright (c) 2017 FIRST. All rights reserved.
-=======
 /* Copyright (c) 2022 FIRST. All rights reserved.
->>>>>>> roadrunner-update
  *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted (subject to the limitations in the disclaimer below) provided that
@@ -33,7 +29,6 @@
 
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
-
 import com.qualcomm.hardware.bosch.BNO055IMU;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -42,12 +37,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-
-import org.checkerframework.checker.units.qual.Speed;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
-import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
-import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
-
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -87,7 +76,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  *  This is consistent with the FTC field coordinate conventions set out in the document:
  *  ftc_app\doc\tutorial\FTC_FieldCoordinateSystemDefinition.pdf
  *
+<<<<<<< HEAD
 
+=======
+>>>>>>> FtcRobotController/master
  *  Control Approach.
  *
  *  To reach, or maintain a required heading, this code implements a basic Proportional Controller where:
@@ -101,7 +93,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  *
  *  Use Android Studio to Copy this Class, and Paste it into your "TeamCode" folder with a new name.
  *  Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
+<<<<<<< HEAD
 
+=======
+>>>>>>> FtcRobotController/master
  */
 
 @Autonomous(name="Robot: Auto Drive By Gyro", group="Robot")
@@ -111,7 +106,6 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
     /* Declare OpMode members. */
     private DcMotor         leftDrive   = null;
     private DcMotor         rightDrive  = null;
-
     private BNO055IMU       imu         = null;      // Control/Expansion Hub IMU
 
     private double          robotHeading  = 0;
@@ -135,6 +129,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
     // This is gearing DOWN for less speed and more torque.
     // For gearing UP, use a gear ratio less than 1.0. Note this will affect the direction of wheel rotation.
 
+
     static final double     COUNTS_PER_MOTOR_REV    = 537.7 ;   // eg: GoBILDA 312 RPM Yellow Jacket
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
@@ -142,7 +137,6 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
 
     // These constants define the desired driving/control characteristics
-
     // They can/should be tweaked to suit the specific robot drive train.
     static final double     DRIVE_SPEED             = 0.4;     // Max driving speed for better distance accuracy.
     static final double     TURN_SPEED              = 0.2;     // Max Turn speed to limit turn rate
@@ -168,7 +162,6 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
-
 
         // define initialization values for IMU, and then initialize it.
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -218,6 +211,20 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
     }
 
     /*
+     * ====================================================================================================
+     * Driving "Helper" functions are below this line.
+     * These provide the high and low level methods that handle driving straight and turning.
+     * ====================================================================================================
+     */
+
+    // **********  HIGH Level driving functions.  ********************
+
+    /**
+    *  Method to drive in a straight line, on a fixed compass heading (angle), based on encoder counts.
+    *  Move will stop if either of these conditions occur:
+    *  1) Move gets to the desired position
+    *  2) Driver stops the opmode running.
+    *
     * @param maxDriveSpeed MAX Speed for forward/rev motion (range 0 to +1.0) .
     * @param distance   Distance (in inches) to move from current position.  Negative distance means move backward.
     * @param heading      Absolute Heading Angle (in Degrees) relative to last gyro reset.
@@ -233,7 +240,6 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-
             int moveCounts = (int)(distance * COUNTS_PER_INCH);
             leftTarget = leftDrive.getCurrentPosition() + moveCounts;
             rightTarget = rightDrive.getCurrentPosition() + moveCounts;
@@ -254,6 +260,7 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
             // keep looping while we are still active, and BOTH motors are running.
             while (opModeIsActive() &&
                    (leftDrive.isBusy() && rightDrive.isBusy())) {
+
 
 
                 // Determine required steering to keep on heading
@@ -317,16 +324,10 @@ public class RobotAutoDriveByGyro_Linear extends LinearOpMode {
     /**
      *  Method to obtain & hold a heading for a finite amount of time
      *  Move will stop once the requested time has elapsed
-<<<<<<< HEAD
-     *
-     * @param speed      Desired speed of turn.
-     * @param angle      Absolute Angle (in Degrees) relative to last gyro reset.
-=======
      *  This function is useful for giving the robot a moment to stabilize it's heading between movements.
-     *
+     *  *
      * @param maxTurnSpeed      Maximum differential turn speed (range 0 to +1.0)
      * @param heading    Absolute Heading Angle (in Degrees) relative to last gyro reset.
->>>>>>> roadrunner-update
      *                   0 = fwd. +ve is CCW from fwd. -ve is CW from forward.
      *                   If a relative angle is required, add/subtract from current heading.
      * @param holdTime   Length of time (in seconds) to hold the specified heading.

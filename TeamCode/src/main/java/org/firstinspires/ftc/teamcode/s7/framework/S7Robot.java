@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.s7.framework;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -95,6 +96,12 @@ public class S7Robot {
     public void setGrabberPosition(double position) {
         grabberRight.setPosition(position);
         grabberLeft.setPosition(position);
+    }
+
+    public void waitForRR(LinearOpMode opMode) {
+        while (!opMode.isStopRequested() && drive.isBusy()) {
+            opMode.idle();
+        }
     }
 
     /*IsBusy: return drive's IsBusy*/

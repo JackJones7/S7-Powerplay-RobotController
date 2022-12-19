@@ -99,6 +99,10 @@ public class S7Robot {
         grabberLeft.setPosition(position);
     }
 
+    //public void waitForServos(LinearOpMode opMode) {
+    //
+    //}
+
     public void waitForRR(LinearOpMode opMode) {
         while (!opMode.isStopRequested() && drive.isBusy()) {
             opMode.idle();

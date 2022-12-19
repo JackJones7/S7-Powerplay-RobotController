@@ -4,9 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion;
+import org.firstinspires.ftc.robotcore.external.ExportClassToBlocks;
 import org.firstinspires.ftc.robotcore.external.ExportToBlocks;
 import org.firstinspires.ftc.teamcode.s7.framework.S7Robot;
 
+@ExportClassToBlocks
 public class S7RobotBlocks extends BlocksOpModeCompanion {
 
     @ExportToBlocks (
@@ -47,6 +49,14 @@ public class S7RobotBlocks extends BlocksOpModeCompanion {
     )
     public static void strafeLeft(S7Robot robot, double distance) {
         robot.strafeLeft(distance);
+    }
+
+    @ExportToBlocks (
+            tooltip = "Wait for RoadRunner processes to finish",
+            parameterLabels = {"Robot"}
+    )
+    public static void waitForRR(S7Robot robot) {
+        robot.waitForRR(linearOpMode);
     }
 
 }

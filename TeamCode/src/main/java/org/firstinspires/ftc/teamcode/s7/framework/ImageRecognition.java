@@ -65,6 +65,4 @@ public class ImageRecognition {
         return label;
     }
 
-
-
 }

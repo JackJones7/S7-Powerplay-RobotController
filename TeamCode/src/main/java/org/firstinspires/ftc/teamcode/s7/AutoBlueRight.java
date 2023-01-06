@@ -3,12 +3,16 @@ package org.firstinspires.ftc.teamcode.s7;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.s7.framework.ImageRecognition;
 import org.firstinspires.ftc.teamcode.s7.framework.S7Robot;
 
 @Autonomous
 public class AutoBlueRight extends LinearOpMode {
 
     protected S7Robot robot;
+    protected ImageRecognition imageRecognition;
+
+    protected String signalLabel = "";
 
     public void runOpMode() throws InterruptedException {
 
@@ -16,8 +20,15 @@ public class AutoBlueRight extends LinearOpMode {
         robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
         robot.setGrabberPosition(0.3);
 
+        imageRecognition = new ImageRecognition();
+
         waitForStart();
+
         /*               Run                       */
+        //TODO: Add timer to keep this phase from holding up everything else
+        while (signalLabel == "" && !isStopRequested()) {
+            signalLabel = imageRecognition.detectSignal();
+        }
 
         robot.strafeRight(22);
         robot.waitForRR(this);

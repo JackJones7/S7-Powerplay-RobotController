@@ -50,12 +50,12 @@ public class AutoBlueRight extends LinearOpMode {
         if (signalLabel == "1 Bolt") {
             robot.strafeLeft(35);
         } if (signalLabel == "2 Bulb") {
-            robot.strafeLeft(12);
+            robot.strafeLeft(10);
         } if (signalLabel == "3 Panel") {
             robot.strafeRight(27);
         }
         robot.waitForRR(this);
-        robot.forward(24);
+        robot.forward(28);
         robot.waitForRR(this);
     }
 

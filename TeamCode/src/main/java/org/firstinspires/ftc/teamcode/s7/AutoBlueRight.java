@@ -41,9 +41,21 @@ public class AutoBlueRight extends LinearOpMode {
         }
 
         //Move to nearest ground junction
-        robot.strafeRight(10);
+        //robot.strafeRight(10);
+        //robot.waitForRR(this);
+        //robot.forward(7);
+        //robot.waitForRR(this);
+
+        //Park in the correct spot
+        if (signalLabel == "1 Bolt") {
+            robot.strafeLeft(35);
+        } if (signalLabel == "2 Bulb") {
+            robot.strafeLeft(12);
+        } if (signalLabel == "3 Panel") {
+            robot.strafeRight(27);
+        }
         robot.waitForRR(this);
-        robot.forward(7);
+        robot.forward(24);
         robot.waitForRR(this);
     }
 

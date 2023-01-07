@@ -36,6 +36,7 @@ public class S7Robot {
 
         this.grabberLeft.setDirection(Servo.Direction.REVERSE);
 
+        this.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.armMotor.setTargetPosition(0);
     }
 

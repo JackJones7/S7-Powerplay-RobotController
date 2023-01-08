@@ -59,4 +59,14 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
     }
 
+
+    //Strafes left or right depending on sign of distance. Use only when robot is initialized.
+    protected void strafe(double distance) {
+        if (distance >= 0) {
+            robot.strafeRight(distance);
+            return;
+        }
+        robot.strafeLeft(-distance);
+    }
+
 }

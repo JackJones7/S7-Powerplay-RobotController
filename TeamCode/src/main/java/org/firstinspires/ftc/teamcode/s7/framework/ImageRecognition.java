@@ -25,19 +25,25 @@ public class ImageRecognition {
 
 
     public ImageRecognition () {
-        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
-        parameters.vuforiaLicenseKey = VUFORIA_KEY;
-        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
-        parameters.fillCameraMonitorViewParent = true;
-        vuforia = ClassFactory.getInstance().createVuforia(parameters);
 
-        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters();
-        tfodParameters.minResultConfidence = 0.75f;
-        tfodParameters.isModelTensorFlow2 = true;
-        tfodParameters.inputSize = 300;
-        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
-        tfod.activate();
+        try {
+            VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+            parameters.vuforiaLicenseKey = VUFORIA_KEY;
+            parameters.cameraDirection = VuforiaLocalizer.CameraDirection.BACK;
+            parameters.fillCameraMonitorViewParent = true;
+            vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+            TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters();
+            tfodParameters.minResultConfidence = 0.75f;
+            tfodParameters.isModelTensorFlow2 = true;
+            tfodParameters.inputSize = 300;
+            tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+            tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABELS);
+            tfod.activate();
+        } catch (Exception e) {
+            vuforia = null;
+            tfod = null;
+        }
     }
 
     public List<Recognition> getRecognitions() {
@@ -49,6 +55,10 @@ public class ImageRecognition {
     }
 
     public String detectSignal() {
+        if (tfod == null) {
+            return "";
+        }
+
         List<Recognition> updatedRecognitions = getUpdatedRecognitions();
         if (updatedRecognitions == null) {return "";}
 

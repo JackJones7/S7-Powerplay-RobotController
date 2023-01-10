@@ -17,18 +17,22 @@ public class AutoBlueRight extends LinearOpMode {
     protected String signalLabel = "";
     protected ElapsedTime timer;
     protected double[] parkDistance = {-35, -10, 27};
+    protected int inward = -1;
+    protected int outward = 1;
 
     protected void initParameters() {
         parkDistance[0] = -35;
         parkDistance[1] = -10;
         parkDistance[2] = 27;
+        inward = -1;
+        outward = 1;
     }
 
     public void runOpMode() throws InterruptedException {
 
         /*               Init                       */
         robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
-        robot.setGrabberPosition(0.6);
+        robot.setGrabberPosition(0.52);
 
         initParameters();
 
@@ -49,25 +53,37 @@ public class AutoBlueRight extends LinearOpMode {
             telemetry.update();
         }
 
-        //Move to nearest ground junction
-        //robot.strafeRight(10);
-        //robot.waitForRR(this);
-        //robot.forward(7);
-        //robot.waitForRR(this);
+        //Move to medium junction
+        strafe(35 * inward);
+        robot.waitForRR(this);
+        robot.forward(26);
+        robot.waitForRR(this);
+
+        //Move to front of medium junction and place cone
+        strafe(12 * outward);
+        robot.waitForRR(this);
+        robot.forward(8);
+        robot.waitForRR(this);
+
+        //Back up and get ready to park
+        robot.back(8);
+        robot.waitForRR(this);
+        strafe(12 * inward);
+        robot.waitForRR(this);
+        robot.forward(26);
+        robot.waitForRR(this);
 
         //Park in the correct spot
-        if (signalLabel == "1 Bolt" || signalLabel == "") {
-            strafe(parkDistance[0]);
-        } if (signalLabel == "2 Bulb") {
-            strafe(parkDistance[1]);
-        } if (signalLabel == "3 Panel") {
-            strafe(parkDistance[2]);
-        }
-        telemetry.addData("park distance", parkDistance);
-        telemetry.update();
-        robot.waitForRR(this);
-        robot.forward(28);
-        robot.waitForRR(this);
+        //if (signalLabel == "1 Bolt" || signalLabel == "") {
+        //    strafe(parkDistance[0]);
+        //} if (signalLabel == "2 Bulb") {
+        //    strafe(parkDistance[1]);
+        //} if (signalLabel == "3 Panel") {
+        //    strafe(parkDistance[2]);
+        //}
+        //robot.waitForRR(this);
+        //robot.forward(28);
+        //robot.waitForRR(this);
     }
 
 

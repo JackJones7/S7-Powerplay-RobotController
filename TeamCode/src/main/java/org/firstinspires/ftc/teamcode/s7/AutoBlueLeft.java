@@ -9,6 +9,8 @@ public class AutoBlueLeft extends AutoBlueRight{
         parkDistance[0] = -27;
         parkDistance[1] = 10;
         parkDistance[2] = 35;
+        inward = 1;
+        outward = -1;
     }
 
 }

@@ -18,6 +18,12 @@ public class AutoBlueRight extends LinearOpMode {
     protected ElapsedTime timer;
     protected double[] parkDistance = {-35, -10, 27};
 
+    protected void initParameters() {
+        parkDistance[0] = -35;
+        parkDistance[1] = -10;
+        parkDistance[2] = 27;
+    }
+
     public void runOpMode() throws InterruptedException {
 
         /*               Init                       */

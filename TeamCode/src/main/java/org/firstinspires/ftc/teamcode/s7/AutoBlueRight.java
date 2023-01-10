@@ -16,6 +16,7 @@ public class AutoBlueRight extends LinearOpMode {
 
     protected String signalLabel = "";
     protected ElapsedTime timer;
+    protected double[] parkDistance = {-35, -10, 27};
 
     public void runOpMode() throws InterruptedException {
 
@@ -47,12 +48,12 @@ public class AutoBlueRight extends LinearOpMode {
         //robot.waitForRR(this);
 
         //Park in the correct spot
-        if (signalLabel == "1 Bolt") {
-            robot.strafeLeft(35);
+        if (signalLabel == "1 Bolt" || signalLabel == "") {
+            strafe(parkDistance[0]);
         } if (signalLabel == "2 Bulb") {
-            robot.strafeLeft(10);
+            strafe(parkDistance[1]);
         } if (signalLabel == "3 Panel") {
-            robot.strafeRight(27);
+            strafe(parkDistance[2]);
         }
         robot.waitForRR(this);
         robot.forward(28);

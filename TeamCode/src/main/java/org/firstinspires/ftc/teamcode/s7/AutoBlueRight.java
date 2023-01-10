@@ -48,7 +48,7 @@ public class AutoBlueRight extends LinearOpMode {
 
         //Park in the correct spot
         if (signalLabel == "1 Bolt") {
-            robot.strafeLeft(35);
+            strafe(-35);
         } if (signalLabel == "2 Bulb") {
             robot.strafeLeft(10);
         } if (signalLabel == "3 Panel") {

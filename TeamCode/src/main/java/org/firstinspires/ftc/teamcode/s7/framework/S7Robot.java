@@ -36,8 +36,8 @@ public class S7Robot {
 
         this.grabberLeft.setDirection(Servo.Direction.REVERSE);
 
-        this.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         this.armMotor.setTargetPosition(0);
+        this.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     /*constructor: same as above + takes start pose, sets drive's pose */

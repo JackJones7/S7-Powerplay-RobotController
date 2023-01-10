@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 public class AutoBlueLeft extends AutoBlueRight{
 
      protected void initParameters() {
-        parkDistance[0] = -27;
-        parkDistance[1] = 10;
-        parkDistance[2] = 35;
+        parkDistance[0] = -1;
+        parkDistance[1] = -28;
+        parkDistance[2] = -52;
         inward = 1;
         outward = -1;
     }

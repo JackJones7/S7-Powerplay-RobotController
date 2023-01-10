@@ -30,6 +30,8 @@ public class AutoBlueRight extends LinearOpMode {
         robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
         robot.setGrabberPosition(0.6);
 
+        initParameters();
+
         telemetry.addData("Image Recognition", "Initializing...");
         telemetry.update();
         imageRecognition = new ImageRecognition();
@@ -61,6 +63,8 @@ public class AutoBlueRight extends LinearOpMode {
         } if (signalLabel == "3 Panel") {
             strafe(parkDistance[2]);
         }
+        telemetry.addData("park distance", parkDistance);
+        telemetry.update();
         robot.waitForRR(this);
         robot.forward(28);
         robot.waitForRR(this);

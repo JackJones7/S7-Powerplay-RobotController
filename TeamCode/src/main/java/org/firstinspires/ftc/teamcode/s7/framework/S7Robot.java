@@ -85,12 +85,8 @@ public class S7Robot {
         armMotor.setTargetPosition(position);
     }
 
-    /*Power Arm: Set arm motor to RunWithoutEncoder if necessary, set arm motor's power*/
+    /*Power Arm: set arm motor's power*/
     public void setArmPower(double power) {
-        if (armMotor.getMode() != DcMotor.RunMode.RUN_WITHOUT_ENCODER) {
-            armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }
-
         armMotor.setPower(power);
     }
 

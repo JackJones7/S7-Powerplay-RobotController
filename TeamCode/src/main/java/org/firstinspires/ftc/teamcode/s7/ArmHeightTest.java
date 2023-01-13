@@ -18,6 +18,7 @@ public class ArmHeightTest extends LinearOpMode {
         /*            Init                  */
         robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
         robot.setArmPosition(0);
+        robot.setArmPower(1);
 
         waitForStart();
         /*            Run                   */

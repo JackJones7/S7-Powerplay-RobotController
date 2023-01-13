@@ -110,6 +110,12 @@ public class S7Robot {
         }
     }
 
+    public void waitForArm(LinearOpMode opMode) {
+        while (!opMode.isStopRequested() && armMotor.isBusy()) {
+            opMode.idle();
+        }
+    }
+
     /*IsBusy: return drive's IsBusy*/
     public boolean isBusy() {
         return drive.isBusy();

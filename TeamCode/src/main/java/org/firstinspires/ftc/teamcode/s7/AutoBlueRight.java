@@ -53,37 +53,41 @@ public class AutoBlueRight extends LinearOpMode {
             telemetry.update();
         }
 
-        //Move to medium junction
-        strafe(32 * inward);
+        //Move to high junction
+        robot.forward(6);
         robot.waitForRR(this);
-        robot.forward(26);
+        robot.turn(90 * inward);
+        robot.waitForRR(this);
+        robot.forward(20);
+        robot.waitForRR(this);
+        strafe(30 * outward);
         robot.waitForRR(this);
 
-        //Move to front of medium junction and place cone
-        strafe(10 * outward);
-        robot.waitForRR(this);
-        //robot.forward(8);
+        ////Move to front of medium junction and place cone
+        //strafe(10 * outward);
         //robot.waitForRR(this);
-        robot.setGrabberPosition(0.6);
-        sleep(500);
-
-        //Back up and get ready to park
-        //robot.back(8);
-        robot.waitForRR(this);
-        strafe(12 * inward);
-        robot.waitForRR(this);
-        robot.forward(26);
-        robot.waitForRR(this);
-
-        //Park in the correct spot
-        if (signalLabel == "1 Bolt" || signalLabel == "") {
-            strafe(parkDistance[0]);
-        } if (signalLabel == "2 Bulb") {
-            strafe(parkDistance[1]);
-        } if (signalLabel == "3 Panel") {
-            strafe(parkDistance[2]);
-        }
-        robot.waitForRR(this);
+        ////robot.forward(8);
+        ////robot.waitForRR(this);
+        //robot.setGrabberPosition(0.6);
+        //sleep(500);
+//
+        ////Back up and get ready to park
+        ////robot.back(8);
+        //robot.waitForRR(this);
+        //strafe(12 * inward);
+        //robot.waitForRR(this);
+        //robot.forward(26);
+        //robot.waitForRR(this);
+//
+        ////Park in the correct spot
+        //if (signalLabel == "1 Bolt" || signalLabel == "") {
+        //    strafe(parkDistance[0]);
+        //} if (signalLabel == "2 Bulb") {
+        //    strafe(parkDistance[1]);
+        //} if (signalLabel == "3 Panel") {
+        //    strafe(parkDistance[2]);
+        //}
+        //robot.waitForRR(this);
     }
 
 

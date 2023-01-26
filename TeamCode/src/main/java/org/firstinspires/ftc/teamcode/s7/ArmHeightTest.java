@@ -16,7 +16,7 @@ public class ArmHeightTest extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException {
         /*            Init                  */
-        robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
+        robot = new S7Robot(hardwareMap, "LeftLiftMotor", "RightLiftMotor", "ClawLeft", "ClawRight");
         robot.setArmPosition(0);
         robot.setArmPower(1);
 

@@ -31,7 +31,7 @@ public class AutoBlueRight extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         /*               Init                       */
-        robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
+        robot = new S7Robot(hardwareMap, "LeftLiftMotor", "RightLiftMotor", "ClawLeft", "ClawRight");
         robot.setGrabberPosition(0.52);
 
         initParameters();
@@ -54,13 +54,13 @@ public class AutoBlueRight extends LinearOpMode {
         }
 
         //Move to high junction
-        robot.forward(6);
+        robot.forward(4);
         robot.waitForRR(this);
-        robot.turn(90 * inward);
+        robot.turn(90 * outward);
         robot.waitForRR(this);
         robot.forward(20);
         robot.waitForRR(this);
-        strafe(30 * outward);
+        strafe(42 * outward);
         robot.waitForRR(this);
 
         ////Move to front of medium junction and place cone

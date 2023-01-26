@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.ExportToBlocks;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 public class S7Robot {
@@ -15,7 +14,8 @@ public class S7Robot {
     //sample mechanum drive
     private SampleMecanumDrive drive;
     //arm elevation motor
-    private DcMotor armMotor;
+    private DcMotor liftMotorLeft;
+    private DcMotor liftMotorRight;
     //left grabber servo
     private Servo grabberLeft;
     //right grabber servo
@@ -26,18 +26,19 @@ public class S7Robot {
     * initializes drive
     * initializes elevation motor for runToPosition mode
     * */
-    public S7Robot(HardwareMap hardwareMap, String armMotorName, String grabberLeftName, String grabberRightName) {
+    public S7Robot(HardwareMap hardwareMap, String liftMotorLeftName, String liftMotorRightName, String grabberLeftName, String grabberRightName) {
         this.hardwareMap = hardwareMap;
         drive = new SampleMecanumDrive(hardwareMap);
 
-        this.armMotor = hardwareMap.get(DcMotor.class, armMotorName);
+        this.liftMotorLeft = hardwareMap.get(DcMotor.class, liftMotorLeftName);
+        this.liftMotorRight = hardwareMap.get(DcMotor.class, liftMotorRightName);
         this.grabberLeft = hardwareMap.get(Servo.class, grabberLeftName);
         this.grabberRight = hardwareMap.get(Servo.class, grabberRightName);
 
         this.grabberLeft.setDirection(Servo.Direction.REVERSE);
 
-        this.armMotor.setTargetPosition(0);
-        this.armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        this.liftMotorLeft.setTargetPosition(0);
+        this.liftMotorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
     }
 
     /*constructor: same as above + takes start pose, sets drive's pose */
@@ -78,16 +79,18 @@ public class S7Robot {
 
     /*Set Arm Position: Sets arm motor to RunToPosition mode if necessary, set arm motor's position*/
     public void setArmPosition(int position) {
-        if (armMotor.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
-            armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if (liftMotorLeft.getMode() != DcMotor.RunMode.RUN_TO_POSITION) {
+            liftMotorLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
 
-        armMotor.setTargetPosition(position);
+        liftMotorLeft.setTargetPosition(position);
+        liftMotorRight.setTargetPosition(position);
     }
 
     /*Power Arm: set arm motor's power*/
     public void setArmPower(double power) {
-        armMotor.setPower(power);
+        liftMotorLeft.setPower(power);
+        liftMotorRight.setPower(power);
     }
 
     /*Set grabber position: Set position of left and right servos. 0 is closed, 1 is open*/
@@ -107,7 +110,7 @@ public class S7Robot {
     }
 
     public void waitForArm(LinearOpMode opMode) {
-        while (!opMode.isStopRequested() && armMotor.isBusy()) {
+        while (!opMode.isStopRequested() && liftMotorLeft.isBusy() && liftMotorRight.isBusy()) {
             opMode.idle();
         }
     }

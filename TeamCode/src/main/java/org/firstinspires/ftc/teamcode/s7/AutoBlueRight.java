@@ -22,8 +22,8 @@ public class AutoBlueRight extends LinearOpMode {
 
     protected void initParameters() {
         parkDistance[0] = 1;
-        parkDistance[1] = 28;
-        parkDistance[2] = 50;
+        parkDistance[1] = 24;
+        parkDistance[2] = 48;
         inward = -1;
         outward = 1;
     }

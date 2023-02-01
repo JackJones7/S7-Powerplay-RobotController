@@ -23,7 +23,7 @@ public class AutoBlueRight extends LinearOpMode {
     protected void initParameters() {
         parkDistance[0] = 1;
         parkDistance[1] = 28;
-        parkDistance[2] = 52;
+        parkDistance[2] = 50;
         inward = -1;
         outward = 1;
     }
@@ -78,24 +78,18 @@ public class AutoBlueRight extends LinearOpMode {
         robot.setGrabberPosition(0.6);
         robot.setArmPower(0);
 
-//
-        ////Back up and get ready to park
-        ////robot.back(8);
-        //robot.waitForRR(this);
-        //strafe(12 * inward);
-        //robot.waitForRR(this);
-        //robot.forward(26);
-        //robot.waitForRR(this);
-//
-        ////Park in the correct spot
-        //if (signalLabel == "1 Bolt" || signalLabel == "") {
-        //    strafe(parkDistance[0]);
-        //} if (signalLabel == "2 Bulb") {
-        //    strafe(parkDistance[1]);
-        //} if (signalLabel == "3 Panel") {
-        //    strafe(parkDistance[2]);
-        //}
-        //robot.waitForRR(this);
+        //Strafe then park
+        strafe(16 * outward);
+        robot.waitForRR(this);
+
+        if (signalLabel == "1 S7") {
+            robot.back(parkDistance[0]);
+        } else if (signalLabel == "2 Ring") {
+            robot.back(parkDistance[1]);
+        } else {
+            robot.back(parkDistance[2]);
+        }
+        robot.waitForRR(this);
     }
 
 

@@ -32,7 +32,7 @@ public class AutoBlueRight extends LinearOpMode {
 
         /*               Init                       */
         robot = new S7Robot(hardwareMap, "LeftLiftMotor", "RightLiftMotor", "ClawLeft", "ClawRight");
-        robot.setGrabberPosition(0.52);
+        robot.setGrabberPosition(0.45);
         robot.setArmPower(0);
 
         initParameters();
@@ -67,6 +67,11 @@ public class AutoBlueRight extends LinearOpMode {
         //Deploy cone
         robot.setArmPower(1);
         robot.setArmPosition(918);
+        robot.waitForArm(this);
+        robot.forward(5);
+        robot.waitForRR(this);
+        robot.setGrabberPosition(1);
+        robot.setArmPower(0);
 
 //
         ////Back up and get ready to park

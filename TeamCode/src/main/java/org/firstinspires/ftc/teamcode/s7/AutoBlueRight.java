@@ -66,7 +66,7 @@ public class AutoBlueRight extends LinearOpMode {
 
         //Deploy cone
         robot.setArmPower(1);
-        robot.setArmPosition(100);
+        robot.setArmPosition(918);
 
 //
         ////Back up and get ready to park

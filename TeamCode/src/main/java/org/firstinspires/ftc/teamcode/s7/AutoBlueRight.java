@@ -71,7 +71,7 @@ public class AutoBlueRight extends LinearOpMode {
 
         //Deploy cone
         robot.setArmPower(1);
-        robot.setArmPosition(918);
+        robot.setArmPosition(945);
         robot.waitForArm(this);
         robot.forward(4);
         robot.waitForRR(this);
@@ -79,7 +79,7 @@ public class AutoBlueRight extends LinearOpMode {
         robot.setArmPower(0);
 
         //Strafe then park
-        strafe(16 * outward);
+        strafe(18 * outward);
         robot.waitForRR(this);
 
         if (signalLabel == "1 S7") {

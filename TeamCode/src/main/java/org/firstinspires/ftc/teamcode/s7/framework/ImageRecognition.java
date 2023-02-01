@@ -18,9 +18,9 @@ public class ImageRecognition {
     private TFObjectDetector tfod;
 
     public static final String[] LABELS = {
-            "1 Bolt",
-            "2 Bulb",
-            "3 Panel"
+            "1 S7",
+            "2 Ring",
+            "3 Yoda"
     };
 
 

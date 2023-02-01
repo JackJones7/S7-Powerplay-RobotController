@@ -25,7 +25,7 @@ public class ArmHeightTest extends LinearOpMode {
 
         /*            Loop                  */
         while (opModeIsActive() && !isStopRequested()) {
-            armHeight += gamepad1.left_stick_y;
+            armHeight -= gamepad1.left_stick_y;
             robot.setArmPosition(armHeight);
 
             telemetry.addData("arm height", armHeight);

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.s7.framework;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -31,6 +32,7 @@ public class S7Robot {
         drive = new SampleMecanumDrive(hardwareMap);
 
         this.liftMotorLeft = hardwareMap.get(DcMotor.class, liftMotorLeftName);
+        this.liftMotorLeft.setDirection(DcMotorSimple.Direction.REVERSE);
         this.liftMotorRight = hardwareMap.get(DcMotor.class, liftMotorRightName);
         this.grabberLeft = hardwareMap.get(Servo.class, grabberLeftName);
         this.grabberRight = hardwareMap.get(Servo.class, grabberRightName);

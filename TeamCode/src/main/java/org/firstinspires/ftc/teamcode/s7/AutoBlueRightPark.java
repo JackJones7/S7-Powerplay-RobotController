@@ -27,7 +27,7 @@ public class AutoBlueRightPark extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         /*               Init                       */
-        robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
+        robot = new S7Robot(hardwareMap, "LeftLiftMotor", "ClawLeft", "ClawRight");
         robot.setGrabberPosition(0.6);
 
         initParameters();

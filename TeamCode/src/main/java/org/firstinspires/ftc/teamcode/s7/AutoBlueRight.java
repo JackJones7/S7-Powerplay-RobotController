@@ -54,11 +54,6 @@ public class AutoBlueRight extends LinearOpMode {
             telemetry.update();
         }
 
-        //Lift cone off ground
-        robot.setArmPower(1);
-        robot.setArmPosition(5);
-        robot.waitForArm(this);
-
         //Move to high junction
         robot.forward(4);
         robot.waitForRR(this);

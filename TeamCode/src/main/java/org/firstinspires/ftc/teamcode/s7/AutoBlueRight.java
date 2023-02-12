@@ -17,18 +17,23 @@ public class AutoBlueRight extends LinearOpMode {
     protected String signalLabel = "";
     protected ElapsedTime timer;
     protected double[] parkDistance = {-35, -10, 27};
+    protected int inward = -1;
+    protected int outward = 1;
 
     protected void initParameters() {
-        parkDistance[0] = -35;
-        parkDistance[1] = -10;
-        parkDistance[2] = 27;
+        parkDistance[0] = 1;
+        parkDistance[1] = 24;
+        parkDistance[2] = 48;
+        inward = -1;
+        outward = 1;
     }
 
     public void runOpMode() throws InterruptedException {
 
         /*               Init                       */
-        robot = new S7Robot(hardwareMap, "LiftMotor", "ClawLeft", "ClawRight");
-        robot.setGrabberPosition(0.6);
+        robot = new S7Robot(hardwareMap, "LeftLiftMotor", "RightLiftMotor", "ClawLeft", "ClawRight");
+        robot.setGrabberPosition(0.45);
+        robot.setArmPower(0);
 
         initParameters();
 
@@ -49,24 +54,41 @@ public class AutoBlueRight extends LinearOpMode {
             telemetry.update();
         }
 
-        //Move to nearest ground junction
-        //robot.strafeRight(10);
-        //robot.waitForRR(this);
-        //robot.forward(7);
-        //robot.waitForRR(this);
+        //Lift cone off ground
+        robot.setArmPower(1);
+        robot.setArmPosition(5);
+        robot.waitForArm(this);
 
-        //Park in the correct spot
-        if (signalLabel == "1 Bolt" || signalLabel == "") {
-            strafe(parkDistance[0]);
-        } if (signalLabel == "2 Bulb") {
-            strafe(parkDistance[1]);
-        } if (signalLabel == "3 Panel") {
-            strafe(parkDistance[2]);
-        }
-        telemetry.addData("park distance", parkDistance);
-        telemetry.update();
+        //Move to high junction
+        robot.forward(4);
         robot.waitForRR(this);
-        robot.forward(28);
+        robot.turn(90 * outward);
+        robot.waitForRR(this);
+        robot.forward(18);
+        robot.waitForRR(this);
+        strafe(43 * outward);
+        robot.waitForRR(this);
+
+        //Deploy cone
+        robot.setArmPower(1);
+        robot.setArmPosition(945);
+        robot.waitForArm(this);
+        robot.forward(4);
+        robot.waitForRR(this);
+        robot.setGrabberPosition(0.6);
+        robot.setArmPower(0);
+
+        //Strafe then park
+        strafe(18 * outward);
+        robot.waitForRR(this);
+
+        if (signalLabel == "1 S7") {
+            robot.back(parkDistance[0]);
+        } else if (signalLabel == "2 Ring") {
+            robot.back(parkDistance[1]);
+        } else {
+            robot.back(parkDistance[2]);
+        }
         robot.waitForRR(this);
     }
 

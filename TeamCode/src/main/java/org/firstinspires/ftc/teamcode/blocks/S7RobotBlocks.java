@@ -15,8 +15,8 @@ public class S7RobotBlocks extends BlocksOpModeCompanion {
             tooltip = "Create new S7Robot",
             parameterLabels = {"Arm Motor Name", "Left Grabber Name", "Right Grabber Name"}
     )
-    public static S7Robot S7Robot (String armMotorName, String grabberLeftName, String grabberRightName) {
-        return new S7Robot(hardwareMap, armMotorName, grabberLeftName, grabberRightName);
+    public static S7Robot S7Robot (String liftMotorLeftName, String liftMotorRightName, String grabberLeftName, String grabberRightName) {
+        return new S7Robot(hardwareMap, liftMotorLeftName, liftMotorRightName, grabberLeftName, grabberRightName);
     }
 
     @ExportToBlocks (

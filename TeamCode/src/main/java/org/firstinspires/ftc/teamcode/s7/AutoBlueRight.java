@@ -68,7 +68,7 @@ public class AutoBlueRight extends LinearOpMode {
         robot.setArmPower(1);
         robot.setArmPosition(935);
         robot.waitForArm(this);
-        robot.forward(4);
+        robot.forward(5);
         robot.waitForRR(this);
         robot.setGrabberPosition(0.6);
         robot.setArmPower(0);

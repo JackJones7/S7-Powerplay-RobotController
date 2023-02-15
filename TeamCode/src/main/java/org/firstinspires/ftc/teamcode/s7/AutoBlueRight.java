@@ -61,12 +61,12 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
         robot.forward(18);
         robot.waitForRR(this);
-        strafe(43 * outward);
+        strafe(44 * outward);
         robot.waitForRR(this);
 
         //Deploy cone
         robot.setArmPower(1);
-        robot.setArmPosition(945);
+        robot.setArmPosition(935);
         robot.waitForArm(this);
         robot.forward(4);
         robot.waitForRR(this);

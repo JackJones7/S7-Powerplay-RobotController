@@ -68,10 +68,12 @@ public class AutoBlueRight extends LinearOpMode {
         robot.setArmPower(1);
         robot.setArmPosition(935);
         robot.waitForArm(this);
-        robot.forward(6.5);
+        robot.forward(8);
         robot.waitForRR(this);
         robot.setGrabberPosition(0.6);
         robot.setArmPower(0);
+        robot.back(4);
+        robot.waitForRR(this);
 
         //Strafe then park
         strafe(18 * outward);

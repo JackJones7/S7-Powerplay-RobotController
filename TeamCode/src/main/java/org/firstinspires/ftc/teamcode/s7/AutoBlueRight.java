@@ -76,7 +76,7 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
 
         //Strafe then park
-        strafe(18 * outward);
+        strafe(16 * outward);
         robot.waitForRR(this);
 
         if (signalLabel == "1 S7") {

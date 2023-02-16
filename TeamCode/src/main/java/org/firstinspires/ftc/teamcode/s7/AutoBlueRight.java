@@ -59,7 +59,7 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
         robot.turn(90 * outward);
         robot.waitForRR(this);
-        robot.forward(18);
+        robot.forward(20.5);
         robot.waitForRR(this);
         strafe(45 * outward);
         robot.waitForRR(this);

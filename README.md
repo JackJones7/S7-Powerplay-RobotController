@@ -1,17 +1,5 @@
-# Road Runner Quickstart
+# Sensational Seven Powerplay Codebase
 
-An example FTC project using [Road Runner](https://github.com/acmerobotics/road-runner). **Note:** Road Runner is in alpha and many of its APIs are incubating.
+This is the robot controller app code for the Sensational Seven in the 2022-2023 Powerplay season. It's based on the Roadrunner quickstart repository by ACME Robotics (https://github.com/acmerobotics/road-runner-quickstart)
 
-## Installation
-
-For more detailed instructions on getting Road Runner setup in your own project, see the [Road Runner README](https://github.com/acmerobotics/road-runner#core).
-
-1. Download or clone this repo with `git clone https://github.com/acmerobotics/road-runner-quickstart`.
-
-1. Open the project in Android Studio and build `TeamCode` like any other `ftc_app` project.
-
-1. If you have trouble with multidex, enable proguard by changing `useProguard` to `true` in `build.common.gradle`.
-
-## Documentation
-
-Check out the new [online quickstart documentation](https://acme-robotics.gitbook.io/road-runner/quickstart/introduction).
+OpModes and framework code can be found in TeamCode/src/main/java/org/firstinspires/ftc/teamcode/. Our code is in the s7 and blocks folders, most other code is from Roadrunner.

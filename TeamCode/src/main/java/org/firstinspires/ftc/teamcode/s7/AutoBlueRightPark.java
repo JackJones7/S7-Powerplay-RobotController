@@ -50,15 +50,13 @@ public class AutoBlueRightPark extends LinearOpMode {
         }
 
         //Park in the correct spot
-        if (signalLabel == "1 S7" || signalLabel == "") {
+        if (signalLabel == "GreenTriangle" || signalLabel == "") {
             strafe(parkDistance[0]);
-        } if (signalLabel == "2 Ring") {
+        } if (signalLabel == "PurpleSquare") {
             strafe(parkDistance[1]);
-        } if (signalLabel == "3 Yoda") {
+        } if (signalLabel == "OrangeCircle") {
             strafe(parkDistance[2]);
         }
-        telemetry.addData("park distance", parkDistance);
-        telemetry.update();
         robot.waitForRR(this);
         robot.forward(28);
         robot.waitForRR(this);

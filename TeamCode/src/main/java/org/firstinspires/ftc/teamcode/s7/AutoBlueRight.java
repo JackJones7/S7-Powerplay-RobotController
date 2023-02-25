@@ -79,9 +79,9 @@ public class AutoBlueRight extends LinearOpMode {
         strafe(16 * outward);
         robot.waitForRR(this);
 
-        if (signalLabel == "1 S7") {
+        if (signalLabel == "GreenTrianle") {
             robot.back(parkDistance[0]);
-        } else if (signalLabel == "2 Ring") {
+        } else if (signalLabel == "PurpleSquare") {
             robot.back(parkDistance[1]);
         } else {
             robot.back(parkDistance[2]);

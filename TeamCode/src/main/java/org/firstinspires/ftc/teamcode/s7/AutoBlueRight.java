@@ -59,16 +59,16 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
         robot.turn(90 * outward);
         robot.waitForRR(this);
-        robot.forward(14.5);
+        robot.forward(15.5);
         robot.waitForRR(this);
-        strafe(45 * outward);
+        strafe(39.5 * outward);
         robot.waitForRR(this);
 
         //Deploy cone
         robot.setArmPower(1);
-        robot.setArmPosition(935);
+        robot.setArmPosition(925);
         robot.waitForArm(this);
-        robot.forward(5);
+        robot.forward(3.5);
         robot.waitForRR(this);
         robot.setGrabberPosition(0.6);
         robot.setArmPower(0);
@@ -76,7 +76,7 @@ public class AutoBlueRight extends LinearOpMode {
         robot.waitForRR(this);
 
         //Strafe then park
-        strafe(14 * outward);
+        strafe(10 * outward);
         robot.waitForRR(this);
 
         if (signalLabel == "GreenTrianle") {
